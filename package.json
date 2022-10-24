@@ -27,7 +27,11 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@bcad1591/react-date-picker": "^0.1.1",
+        "@fullcalendar/daygrid": "^5.11.3",
+        "@fullcalendar/react": "^5.11.2",
         "react-calendar-heatmap": "^1.8.1",
+        "react-datepicker": "^4.8.0",
         "react-modal": "^3.12.1"
     }
 }

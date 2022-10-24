@@ -12,6 +12,6 @@ class Category extends Model
     protected $guarded = [];
 
     public function travel_packages(){
-        return $this->hasMany(TravelPackage::class);
+        return $this->hasMany(TravelPackage::class, 'category_id', 'category_id');
     }
 }

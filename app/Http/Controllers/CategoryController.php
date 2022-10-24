@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use Illuminate\Http\RedirectResponse;
@@ -26,7 +27,9 @@ class CategoryController extends Controller
     {
         Category::create($request->all());
 
-        return redirect()->route('admin.categories.index')->with('message', 'Added Successfully !');
+        Session::flash('flash_message', 'Task successfully added!');
+        
+        return redirect()->route('admin.categories.index');
     }
 
     public function edit(Category $category) : View

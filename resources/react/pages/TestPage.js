@@ -4,6 +4,11 @@ import ReactDOM from 'react-dom'
 import CalendarHeatmap from 'react-calendar-heatmap'
 import 'react-calendar-heatmap/dist/styles.css'
 
+
+import FullCalendar from '@fullcalendar/react' // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+
+
 import axios from 'axios'
 
 import uuid from 'uuid/v4'
@@ -18,6 +23,8 @@ class TestPage extends Component {
       title: 'Hello World as',
       subtitle: 'Makan makan'
     }
+
+    
     
   }
 
@@ -52,6 +59,22 @@ class TestPage extends Component {
       {this.state.order_id}
 
 
+     
+     
+
+      <FullCalendar
+        plugins={[ dayGridPlugin ]}
+        initialView="dayGridMonth"
+
+        // weekends={false}
+        events={[
+          { title: 'event 1', date: '2022-10-05' },
+          { title: 'event 2', date: '2022-10-02' }
+        ]}
+      />
+     
+
+
       {/* <h3>Heatmap</h3> */}
 {/*
       <CalendarHeatmap
@@ -72,12 +95,16 @@ class TestPage extends Component {
 
 }
 
+
+
 export default TestPage;
 
 if (document.getElementById("root")) {
 
   const element = document.getElementById('root');
-  const props = Object.assign({},element.dataset);
+  const props = Object.assign({},element.dataset); 
+
+
 
   ReactDOM.render(<TestPage {...props} />, document.getElementById("root"));
 }

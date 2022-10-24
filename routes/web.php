@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/homepage', 'HomeController@homepage')->name('homepage');
+
 Route::view('/show_react','show_react');
 
 /////////////////
@@ -42,7 +44,15 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
 
   Route::resource('categories','CategoryController',['as'=>'admin']);
 
+  Route::resource('posts','PostController',['as'=>'admin']);
+
+  Route::resource('travel-packages','TravelPackageController',['as'=>'admin']);
+
   Route::resource('tasks','AdminTasksController',['as'=>'admin']);
+
+  Route::resource('places','PlaceController',['as'=>'admin']);
+
+  Route::resource('bookings','BookingController',['as'=>'admin']);
 
 
 });

@@ -101,6 +101,34 @@ $section_01_links = [
       'active_path' => 'admin/categories',
       'icon_class' => 'bi bi-cpu-fill mr-2'
     ],
+
+    [
+      'title'=>'Post',
+      'link' => '/admin/posts',
+      'active_path' => 'admin/posts',
+      'icon_class' => 'bi bi-cpu-fill mr-2'
+    ],
+
+    [
+      'title'=>'Travel Package',
+      'link' => '/admin/travel-packages',
+      'active_path' => 'admin/travel-packages',
+      'icon_class' => 'bi bi-cpu-fill mr-2'
+    ],
+
+    [
+      'title'=>'Places',
+      'link' => '/admin/places',
+      'active_path' => 'admin/places',
+      'icon_class' => 'bi bi-cpu-fill mr-2'
+    ],
+
+    [
+      'title'=>'Bookings',
+      'link' => '/admin/bookings',
+      'active_path' => 'admin/bookings',
+      'icon_class' => 'bi bi-cpu-fill mr-2'
+    ],
 ]
 ?>
 <ul class="navbar-nav">
