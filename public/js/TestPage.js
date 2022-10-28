@@ -43978,21 +43978,89 @@ var TestPage = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, TestPage);
 
     _this = _super.call(this, props);
+    Object.defineProperty(_assertThisInitialized(_this), "handleWeekendsToggle", {
+      enumerable: true,
+      writable: true,
+      value: function value() {
+        _this.setState({
+          weekendsVisible: !_this.state.weekendsVisible
+        });
+      }
+    });
+    Object.defineProperty(_assertThisInitialized(_this), "handleDateSelect", {
+      enumerable: true,
+      writable: true,
+      value: function value(selectInfo) {
+        var title = prompt('Please enter a new title for your event');
+        var calendarApi = selectInfo.view.calendar;
+        calendarApi.unselect(); //clear date selection
+
+        if (title) {
+          calendarApi.addEvent({
+            id: createEventId(),
+            title: title,
+            start: selectInfo.startStr,
+            end: selectInfo.endStr,
+            allDay: selectInfo.allDay
+          });
+        }
+      }
+    });
+    Object.defineProperty(_assertThisInitialized(_this), "handleEventClick", {
+      enumerable: true,
+      writable: true,
+      value: function value(clickInfo) {
+        // bind with an arrow function
+        if (confirm("Are you sure you want to delete the event '".concat(clickInfo.event.title, "'"))) {
+          clickInfo.event.remove();
+        }
+      }
+    });
+    Object.defineProperty(_assertThisInitialized(_this), "handleEvents", {
+      enumerable: true,
+      writable: true,
+      value: function value(events) {
+        _this.setState({
+          currentEvents: events
+        });
+      }
+    });
     _this.state = {
       order_id: props.order_id,
       title: 'Hello World as',
-      subtitle: 'Makan makan'
+      subtitle: 'Makan makan',
+      array: [],
+      bookings: [],
+      weekendsVisible: true,
+      currentEvents: []
     };
     return _this;
   }
 
   _createClass(TestPage, [{
     key: "componentDidMount",
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.get('/api/test_data').then(function (res) {
+        console.log(res.data);
+
+        _this2.setState({
+          array: res.data.places
+        });
+      });
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.get('/api/bookings').then(function (res) {
+        console.log(res.data);
+
+        _this2.setState({
+          bookings: res.data.bookings
+        });
+      });
+    }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
@@ -44000,28 +44068,59 @@ var TestPage = /*#__PURE__*/function (_Component) {
         className: "btn btn-primary btn-sm",
         onClick: function onClick() {
           // alert('Hello');
-          _this2.setState({
+          _this3.setState({
             title: "hOLLA aMIGO",
             subtitle: "minum air"
           });
         }
-      }, "Hello"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), this.props.order_id, " /", this.state.order_id, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fullcalendar_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, "Hello"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.array.map(function (item) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, item.name);
+      })), this.props.order_id, " /", this.state.order_id, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fullcalendar_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
         plugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_5__["default"]],
         initialView: "dayGridMonth" // weekends={false}
+        // events={[
+        //  { title:'event 1', start: '2022-10-05', end: '2022-10-07' },
+        //  { title: 'event 2', start: '2022-10-02' }
+        // ]}
         ,
-        events: [{
-          title: 'event 1',
-          date: '2022-10-05'
-        }, {
-          title: 'event 2',
-          date: '2022-10-02'
-        }]
+        events: this.state.bookings
       })));
+    }
+  }, {
+    key: "renderSidebarEvent",
+    value: function renderSidebarEvent() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "demo-app-sidebar"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "demo-app-sidebar-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Instructions"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Select dates and you will be prompted to create a new event"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Drag, drop, and resize events"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Click an event to delete it"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "demo-app-sidebar-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        checked: this.state.weekendsVisible,
+        onChange: this.handleWeekendsToggle
+      }), "toggle weekends")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "demo-app-sidebar-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "All Events (", this.state.currentEvents.length, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.currentEvents.map(_renderSidebarEvent))));
     }
   }]);
 
   return TestPage;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+function renderEventContent(eventInfo) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, eventInfo.timeText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, eventInfo.event.title));
+}
+
+function _renderSidebarEvent(event) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    key: event.id
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, formatDate(event.start, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, event.title));
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (TestPage);
 

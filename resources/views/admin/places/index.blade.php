@@ -31,7 +31,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Places</th>
+                            <th>Name</th>
                             
                         </tr>
                     </thead>
@@ -39,7 +39,7 @@
                         @forelse($places as $place)
                         <tr>
                             <td>{{ $place->id }}</td>
-                            <td>{{ $place->places }}</td>
+                            <td>{{ $place->name }}</td>
                            
                             
                             <td>

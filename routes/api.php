@@ -22,5 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'api'], function () {
 
   Route::get('test_data','TestAPIController@test_data');    
+  Route::get('bookings','TestAPIController@bookings');
 
 });

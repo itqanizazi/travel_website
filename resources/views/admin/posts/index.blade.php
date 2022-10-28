@@ -32,7 +32,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            
+                            <th>Image</th>
+                            <th>Content</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -41,7 +42,10 @@
                         <tr>
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->title }}</td>
-                            
+                            <td>
+                                <img width="150" src="{{ Storage::url($post->image) }}" alt="">
+                            </td>
+                            <td>{{ $post->content }}</td>
                             
                             <td>
                                 <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-info">

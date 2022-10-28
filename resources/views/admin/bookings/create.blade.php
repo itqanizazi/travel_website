@@ -27,7 +27,7 @@
                         <label for="name">Place</label>
                         <select name="place_id" class="form-control" >
                         @foreach($places as $place)
-                    <option value="{{ $place->id }}">{{ $place->places }}</option>
+                    <option value="{{ $place->id }}">{{ $place->name }}</option>
                        @endforeach
                         </select>
                     </div>

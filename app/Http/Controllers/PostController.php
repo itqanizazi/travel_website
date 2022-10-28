@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\RedirectResponse;
@@ -23,18 +24,17 @@ class PostController extends Controller
 
     public function create(): View
     {
-        return view('admin.places.create');
+        return view('admin.posts.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
-        $data['image'] = $request->file('image')->store(
-            'assets/post', 'public'
+       $data = $request->all();
+       $data['slug'] = Str::slug($request->title);
+       $data['image'] = $request->file('image')->store(
+           'assets/post', 'public'
         );
        
-
         Post::create($data);
 
         Session::flash('flash_message', 'Task successfully added!');
@@ -60,15 +60,17 @@ class PostController extends Controller
         ) : $post->image;
 
         $post->update($data);
-
         return redirect()->route('admin.posts.index')->with('message', 'Updated Successfully !');
     }
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::find($id);
+        if($post->image){
+            File::delete('storage/' . $post->image);
+        }
 
         $post->delete();
+    
 
         return redirect()->route('admin.posts.index')->with('message', 'Deleted  Successfully !');
     }

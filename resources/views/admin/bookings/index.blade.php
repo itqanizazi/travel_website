@@ -36,7 +36,7 @@
                         @forelse($bookings as $booking)
                         <tr>
                             <td>{{ $booking->id }}</td>
-                            <td>{{ $booking->place->places  }}</td>
+                            <td>{{ $booking->place->name  }}</td>
                             <td>{{ $booking->start_date }}</td>
                             <td>{{ $booking->end_date }}</td>
                            

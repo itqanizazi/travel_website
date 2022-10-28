@@ -24,8 +24,8 @@
                 <form action="{{ route('admin.places.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="places">Place</label>
-                        <input type="text" class="form-control" id="places" name="places" value="{{ old('places') }}" />
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" />
                     </div>
                     
                     <button type="submit" class="btn btn-primary btn-block">Save</button>

@@ -9,6 +9,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
 
 
 // For authentication
@@ -19,7 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/homepage', 'HomeController@homepage')->name('homepage');
+
+
+Route::get('/homepage','PageController@homepage')->name('homepage');
+Route::get('/posts', 'PageController@posts')->name('posts');
+Route::get('/posts/{post:slug}', 'PageController@detailPost')->name('posts.show');
+Route::get('/package', 'PageController@package')->name('package');
+Route::get('/detail/{travelPackage:slug}', [App\Http\Controllers\PageController::class, 'detail'])->name('detail');
 
 Route::view('/show_react','show_react');
 

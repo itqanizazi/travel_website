@@ -71,7 +71,7 @@
         <hr width="40" class="text-center" />
         <div class="row mt-5 justify-content-center">
 
-        @foreach($category->travel_packages as $travelPackage)
+        <!--@foreach($category->travel_packages as $travelPackage)
           <div class="col-lg-3" style="margin-bottom: 140px">
             <div class="card package-card">
               <a href="{{ route('detail', $travelPackage) }}" class="package-link">
@@ -92,7 +92,7 @@
               </a>
             </div>
           </div>
-        @endforeach
+        @endforeach==-->
 
         </div>
       </section>

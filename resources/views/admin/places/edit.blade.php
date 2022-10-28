@@ -25,8 +25,8 @@
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <label for="tplaces">Place</label>
-                        <input type="text" class="form-control" id="places" name="places" value="{{ $place->places }}" />
+                        <label for="tplaces">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $place->name }}" />
                     </div>
                     
                     <button type="submit" class="btn btn-primary btn-block">Save</button>
